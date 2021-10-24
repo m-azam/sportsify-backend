@@ -24,6 +24,7 @@ app.add_middleware(
     allow_methods=[""],
     allow_headers=["*"],
 )
+app.mount("/services", StaticFiles(directory="services", html = True), name="services")
 
 app.mount("/services", StaticFiles(directory="services", html = True), name="services")
 app.mount("/modules", StaticFiles(directory="modules", html = True), name="modules")
