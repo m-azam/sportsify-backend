@@ -10,6 +10,7 @@ from modules.gif_generator.generate import *
 import base64
 from PIL import Image
 from PIL.ExifTags import TAGS
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
@@ -23,6 +24,7 @@ app.add_middleware(
     allow_methods=[""],
     allow_headers=["*"],
 )
+app.mount("/services", StaticFiles(directory="services", html = True), name="services")
 
 def create_frames(filename):
     vidcap = cv2.VideoCapture(filename)
