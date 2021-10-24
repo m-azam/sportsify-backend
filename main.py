@@ -10,6 +10,7 @@ from modules.gif_generator.generate import *
 import base64
 from PIL import Image
 from PIL.ExifTags import TAGS
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
@@ -23,6 +24,9 @@ app.add_middleware(
     allow_methods=[""],
     allow_headers=["*"],
 )
+
+app.mount("/services", StaticFiles(directory="services", html = True), name="services")
+app.mount("/modules", StaticFiles(directory="modules", html = True), name="modules")
 
 def create_frames(filename):
     vidcap = cv2.VideoCapture(filename)
@@ -52,9 +56,9 @@ async def create_upload_file(file: UploadFile = File(...)):
         content = await file.read()  # async read
         await out_file.write(content)# async write
         centered_object = findImage(file.filename)
+    generate_gif(centered_object.title())
         
-        
-    return {"centered_object": centered_object.title()}
+    return {"gif_url": "http://172.18.192.86:8000/modules/output.gif", "pic_url": "http://172.18.192.86:8000/services/frame0.jpg"}
 
 
 
