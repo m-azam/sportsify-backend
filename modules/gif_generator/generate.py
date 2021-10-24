@@ -17,9 +17,8 @@ def get_images(object_type):
     print(os.listdir(folder))
     for img in os.listdir(folder):
         pic = cv2.imread(os.path.join(folder, img))
-        if pic is not None:
-            frames.append(pic)
-            print(f"frame {img} added")
+        frames.append(pic)
+        print(f"frame {img} added")
     return frames
 
 
