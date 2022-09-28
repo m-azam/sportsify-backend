@@ -58,7 +58,7 @@ async def create_upload_file(file: UploadFile = File(...)):
         centered_object = findImage(file.filename)
     generate_gif(centered_object.title())
         
-    return {"gif_url": "http://172.18.192.86:8000/modules/output.gif", "pic_url": "http://172.18.192.86:8000/services/frame0.jpg"}
+    return {"gif_url": "http://10.100.219.14:8000/modules/output.gif", "pic_url": "http://10.100.219.14:8000/services/frame0.jpg"}
 
 
 
